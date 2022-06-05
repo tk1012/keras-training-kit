@@ -1,0 +1,12 @@
+defaults:
+  - override hydra/sweeper: ax
+  - _self_
+
+dataset:
+  name: fashion_mnist
+  split: ["test"]
+  data_dir: null
+
+evaluate:
+  model_path: tmp/trained_model
+  pp_mode: tf

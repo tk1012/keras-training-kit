@@ -1,0 +1,17 @@
+defaults:
+  - override hydra/sweeper: ax
+  - _self_
+
+input:  tmp/trained_model
+output: tmp/model.tflite
+enable_tf_ops: false
+allow_custom_ops: false
+ptq:
+  dynamic_range: false
+  float16: false
+  full_integer: false
+  representative_dataset:
+    name: fashion_mnist
+    split: ["test"]
+    pp_mode: 'tf'
+    data_dir: null

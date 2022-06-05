@@ -1,0 +1,13 @@
+defaults:
+  - override hydra/sweeper: ax
+  - _self_
+
+dataset:
+  name: fashion_mnist
+  split: ["test"]
+  data_dir: null
+
+evaluate_tflite:
+  model_path: tmp/model.tflite
+  pp_mode: 'tf'
+  metric: 'SparseCategoricalAccuracy'

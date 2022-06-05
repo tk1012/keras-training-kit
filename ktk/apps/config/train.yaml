@@ -1,0 +1,24 @@
+defaults:
+  - override hydra/sweeper: ax
+  - _self_
+
+model:
+  id: simplednn
+  hyper_param:
+    input_shape: [28, 28, 1]
+    output: 10
+    output_activation: softmax
+  compile_param:
+    optimizer: adam
+    loss: sparse_categorical_crossentropy
+    metrics: ['accuracy']
+
+dataset:
+  name: fashion_mnist
+  split: ["train[:90%]", "train[90%:]"]
+  data_dir: null
+
+train:
+  epoch: 10
+  output_path: outs/trained_model
+  pp_mode: tf

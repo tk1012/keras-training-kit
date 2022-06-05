@@ -1,0 +1,33 @@
+{
+    "name": "kaggle-template",
+    "build": {
+        "dockerfile": "../docker/Dockerfile",
+        "context": "../docker"
+    },
+    "runArgs": [
+        "--gpus",
+        "all"
+    ],
+    "remoteEnv": {
+    },
+    "mounts": [
+        "source=${localEnv:HOME}/.kaggle,target=/home/developer/.kaggle,type=bind,consistency=cached"
+    ],
+    "forwardPorts": [
+        8888
+    ],
+    "extensions": [
+        "GitLab.gitlab-workflow",
+        "ms-azuretools.vscode-docker",
+        "MS-CEINTL.vscode-language-pack-ja",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-toolsai.jupyter",
+        "ms-vscode.cmake-tools",
+        "ms-vscode.cpptools",
+        "yzhang.markdown-all-in-one",
+        "bungcip.better-toml",
+        "trond-snekvik.simple-rst",
+        "njpwerner.autodocstring"
+    ],
+}
