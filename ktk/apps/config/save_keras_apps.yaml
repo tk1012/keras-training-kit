@@ -1,0 +1,12 @@
+defaults:
+  - override hydra/sweeper: ax
+  - _self_
+
+model:
+  id: VGG16
+  compile_param:
+    optimizer: RMSProp
+    loss: sparse_categorical_crossentropy
+    metrics: ['sparse_categorical_accuracy']
+
+output_path: tmp/keras_app

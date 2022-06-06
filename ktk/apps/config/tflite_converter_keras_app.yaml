@@ -1,0 +1,17 @@
+defaults:
+  - override hydra/sweeper: ax
+  - _self_
+
+input:  tmp/keras_app
+output: tmp/model.tflite
+enable_tf_ops: false
+allow_custom_ops: false
+ptq:
+  dynamic_range: true
+  float16: false
+  full_integer: false
+  representative_dataset:
+    name: imagenet2012
+    split: ["validation"]
+    pp_mode: 'caffe'
+    data_dir: /datasets/TFDS

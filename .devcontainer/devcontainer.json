@@ -11,7 +11,8 @@
     "remoteEnv": {
     },
     "mounts": [
-        "source=${localEnv:HOME}/.kaggle,target=/home/developer/.kaggle,type=bind,consistency=cached"
+        "source=${localEnv:HOME}/.kaggle,target=/home/developer/.kaggle,type=bind,consistency=cached",
+        "source=/raid/datasets,target=/datasets,type=bind,consistency=cached"
     ],
     "forwardPorts": [
         8888

@@ -66,3 +66,24 @@ python -m ktk.apps.evaluate --config_name=myconf
 python -m ktk.apps.tflite_converter
 python -m ktk.apps.evaluate_tflite
 ```
+
+## Imagenet Keras Application
+
+### Save a pre-trained model from tf.keras.applications
+
+```sh
+python -m ktk.apps.save_keras.apps
+```
+
+### Evaluate
+
+```sh
+python -m ktk.apps.evaluate --config-name=evaluate_keras_app
+```
+
+### Convert into a TFLite model and evaluate it
+
+```sh
+python -m ktk.apps.tflite_converter --config-name=tflite_converter_keras_app
+python -m ktk.apps.evaluate_tflite --config-name=evaluate_tflite_keras_app
+```

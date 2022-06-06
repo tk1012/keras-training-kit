@@ -7,6 +7,7 @@ docker run \
     -it \
     -u root \
     --gpus all \
+    -v /raid/datasets:/datasets \
     -v "$(pwd)":/workspaces/keras-training-kit \
     -w /workspaces/keras-training-kit \
     -e "HOST_UID=$(id -u)" \

@@ -7,15 +7,17 @@ from tensorflow import keras
 
 
 # TODO modularize preprocessing
-def preprocess_dataset(mode='tf', is_training=True):
+def preprocess_dataset(shape, mode="tf", is_training=True):
     def _pp(image, label):
         if is_training:
+            image = tf.image.resize(image, shape)
             image = tf.cast(image, tf.float32)
             image = keras.applications.imagenet_utils.preprocess_input(
                 image, data_format=None, mode=mode
             )
             # TODO: augmentation
         else:
+            image = tf.image.resize(image, shape)
             image = tf.cast(image, tf.float32)
             image = keras.applications.imagenet_utils.preprocess_input(
                 image, data_format=None, mode=mode
@@ -25,11 +27,11 @@ def preprocess_dataset(mode='tf', is_training=True):
     return _pp
 
 
-def prepare_dataset(dataset, mode='tf', batch_size=32, is_training=True):
+def prepare_dataset(dataset, shape, mode="tf", batch_size=32, is_training=True):
     if is_training:
         dataset = dataset.shuffle(batch_size * 10)
     dataset = dataset.map(
-        preprocess_dataset(mode, is_training), num_parallel_calls=tf.data.AUTOTUNE
+        preprocess_dataset(shape, mode, is_training), num_parallel_calls=tf.data.AUTOTUNE
     )
     return dataset.batch(batch_size).prefetch(tf.data.AUTOTUNE)
 
@@ -72,7 +74,9 @@ def tflite_converter(cfg: DictConfig) -> None:
             as_supervised=True,
         )[0]
 
-        ds = prepare_dataset(ds, mode=cfg.ptq.representative_dataset.pp_mode, is_training=False)
+        # TODO: handle multiple inputs
+        image_shape = model.inputs[0].shape[1:3]
+        ds = prepare_dataset(ds, shape=image_shape, mode=cfg.ptq.representative_dataset.pp_mode, is_training=False)
 
         def representative_dataset():
             for data in ds.take(100).as_numpy_iterator():

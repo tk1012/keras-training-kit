@@ -1,0 +1,13 @@
+defaults:
+  - override hydra/sweeper: ax
+  - _self_
+
+dataset:
+  name: imagenet2012
+  split: ["validation"]
+  data_dir: /datasets/TFDS
+
+evaluate_tflite:
+  model_path: tmp/model.tflite
+  pp_mode: 'caffe'
+  metric: 'SparseCategoricalAccuracy'
